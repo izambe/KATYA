@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сравнение цен на доставку</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="/">Катя</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#search">Поиск</a></li>
+                <li><a href="#compare">Сравнение</a></li>
+                <li><a href="#alerts">Уведомления</a></li>
+            </ul>
+            <div class="user-account">
+                <a href="#login">Войти</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="search-section">
+            <h1>Найдите лучшие цены</h1>
+            <input type="text" id="search-input" placeholder="Введите название продукта...">
+            <button id="search-button">Искать</button>
+            <div class="filters">
+                <select id="category-filter">
+                    <option value="">Все категории</option>
+                    <!-- Categories will be populated here -->
+                </select>
+                <select id="brand-filter">
+                    <option value="">Все бренды</option>
+                    <!-- Brands will be populated here -->
+                </select>
+                <input type="number" id="min-price" placeholder="Мин. цена">
+                <input type="number" id="max-price" placeholder="Макс. цена">
+            </div>
+            <div id="search-results">
+                <!-- Search results will be displayed here -->
+            </div>
+        </section>
+
+        <section id="comparison-section">
+            <h2>Сравнение товаров</h2>
+            <div id="comparison-area">
+                <!-- Products for comparison will be displayed here -->
+            </div>
+        </section>
+
+        <section id="price-history-section">
+            <h2>История цен</h2>
+            <div id="price-chart-area">
+                <!-- Price history graph will be displayed here -->
+            </div>
+        </section>
+
+        <section id="alerts-section">
+            <h2>Уведомления о снижении цен</h2>
+            <div id="alerts-management">
+                <!-- Alert management UI will be here -->
+            </div>
+        </section>
+
+        <section id="user-profile-section" style="display:none;">
+            <h2>Профиль пользователя</h2>
+            <div id="favorite-products">
+                <h3>Избранные товары</h3>
+                <!-- Favorite products will be listed here -->
+            </div>
+            <div id="recommendations">
+                <h3>Рекомендации</h3>
+                <!-- Personalized recommendations will be shown here -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 PriceCompare. Все права защищены.</p>
+    </footer>
+
+    <script src="js/api.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
+<!-- Login/Register Modal -->
+<div id="auth-modal" class="modal" style="display:none;">
+    <div class="modal-content">
+        <span class="close" id="close-auth-modal">&times;</span>
+        <h2>Вход или регистрация</h2>
+        <input type="email" id="auth-email" placeholder="Email">
+        <input type="password" id="auth-password" placeholder="Пароль">
+        <button id="login-btn">Войти</button>
+        <button id="register-btn" class="secondary">Зарегистрироваться</button>
+        <p id="auth-message"></p>
+    </div>
+</div>
+<!-- Chart.js CDN for price history graph -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

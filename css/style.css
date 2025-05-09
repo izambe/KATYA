@@ -1,0 +1,221 @@
+:root {
+    --bg: #f7f7f8;
+    --surface: #fff;
+    --primary: #222;
+    --secondary: #666;
+    --accent: #4f8cff;
+    --border: #e0e0e0;
+    --radius: 12px;
+    --shadow: 0 2px 12px rgba(0,0,0,0.04);
+    --transition: 0.2s cubic-bezier(.4,0,.2,1);
+    --font: 'Inter', 'Segoe UI', Arial, sans-serif;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--primary);
+    font-family: var(--font);
+    font-size: 16px;
+    min-height: 100vh;
+}
+
+header {
+    background: var(--surface);
+    box-shadow: var(--shadow);
+    padding: 0 32px;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+}
+
+.logo a {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary);
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    color: var(--secondary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color var(--transition);
+}
+
+.nav-links a:hover {
+    color: var(--accent);
+}
+
+.user-account a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+    border: 1px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 6px 18px;
+    transition: background var(--transition), color var(--transition);
+}
+
+.user-account a:hover {
+    background: var(--accent);
+    color: #fff;
+}
+
+main {
+    max-width: 900px;
+    margin: 40px auto 0 auto;
+    padding: 0 16px 48px 16px;
+}
+
+section {
+    background: var(--surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 32px;
+    padding: 32px 24px;
+    transition: box-shadow var(--transition);
+}
+
+section:hover {
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+}
+
+h1, h2, h3 {
+    font-weight: 700;
+    margin-top: 0;
+    color: var(--primary);
+}
+
+input, select, button {
+    font-family: var(--font);
+    font-size: 1rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    padding: 10px 14px;
+    margin-right: 12px;
+    margin-bottom: 12px;
+    outline: none;
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+input:focus, select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px #e3f0ff;
+}
+
+button {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background var(--transition), box-shadow var(--transition);
+}
+
+button:hover {
+    background: #2566d4;
+    box-shadow: 0 2px 8px rgba(79,140,255,0.10);
+}
+
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+#search-results, #comparison-area, #price-chart-area, #alerts-management, #favorite-products, #recommendations {
+    margin-top: 24px;
+}
+
+footer {
+    text-align: center;
+    color: var(--secondary);
+    font-size: 0.95rem;
+    padding: 24px 0 12px 0;
+    background: none;
+    border-top: 1px solid var(--border);
+    margin-top: 32px;
+}
+
+@media (max-width: 600px) {
+    main {
+        padding: 0 4px 32px 4px;
+    }
+    section {
+        padding: 18px 6px;
+    }
+    nav {
+        flex-direction: column;
+        height: auto;
+        gap: 8px;
+    }
+    .filters {
+        flex-direction: column;
+        gap: 8px;
+    }
+}
+/* Modal styles */
+.modal {
+    position: fixed;
+    z-index: 1000;
+    left: 0; top: 0; right: 0; bottom: 0;
+    background: rgba(34,34,34,0.18);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity var(--transition);
+}
+.modal-content {
+    background: var(--surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 32px 28px 24px 28px;
+    min-width: 320px;
+    max-width: 90vw;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.close {
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    font-size: 1.5rem;
+    color: var(--secondary);
+    cursor: pointer;
+    transition: color var(--transition);
+}
+.close:hover {
+    color: var(--accent);
+}
+button.secondary {
+    background: #fff;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+}
+button.secondary:hover {
+    background: var(--accent);
+    color: #fff;
+}
+#auth-message {
+    color: var(--secondary);
+    font-size: 0.95rem;
+    min-height: 1.2em;
+}
