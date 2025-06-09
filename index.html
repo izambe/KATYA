@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Сравнение цен на доставку</title>
+    <title>PriceCompare - Сравнение цен на доставку</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -24,7 +24,7 @@
     </header>
 
     <main>
-        <section id="search-section">
+        <section id="search-section" role="search">
             <h1>Найдите лучшие цены</h1>
             <input type="text" id="search-input" placeholder="Введите название продукта...">
             <button id="search-button">Искать</button>
@@ -37,31 +37,33 @@
                     <option value="">Все бренды</option>
                     <!-- Brands will be populated here -->
                 </select>
+                <label for="min-price" class="visually-hidden">Минимальная цена</label>
                 <input type="number" id="min-price" placeholder="Мин. цена">
+                <label for="max-price" class="visually-hidden">Максимальная цена</label>
                 <input type="number" id="max-price" placeholder="Макс. цена">
             </div>
-            <div id="search-results">
+            <div id="search-results" aria-live="polite">
                 <!-- Search results will be displayed here -->
             </div>
         </section>
 
         <section id="comparison-section">
             <h2>Сравнение товаров</h2>
-            <div id="comparison-area">
+            <div id="comparison-area" aria-live="polite">
                 <!-- Products for comparison will be displayed here -->
             </div>
         </section>
 
         <section id="price-history-section">
             <h2>История цен</h2>
-            <div id="price-chart-area">
+            <div id="price-chart-area" aria-live="polite">
                 <!-- Price history graph will be displayed here -->
             </div>
         </section>
 
         <section id="alerts-section">
             <h2>Уведомления о снижении цен</h2>
-            <div id="alerts-management">
+            <div id="alerts-management" aria-live="polite">
                 <!-- Alert management UI will be here -->
             </div>
         </section>
