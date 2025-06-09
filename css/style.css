@@ -21,6 +21,17 @@ html, body {
     min-height: 100vh;
 }
 
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
 header {
     background: var(--surface);
     box-shadow: var(--shadow);
@@ -143,6 +154,41 @@ button:hover {
     margin-top: 24px;
 }
 
+/* Styles for placeholder messages in results areas */
+#search-results p,
+#comparison-area p,
+#price-chart-area p, /* If canvas fails to load */
+#alerts-management p,
+#favorite-products p,
+#recommendations p {
+    color: var(--secondary);
+    font-style: italic;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Comparison Table Styles */
+.comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+}
+.comparison-table th, .comparison-table td {
+    border: 1px solid var(--border);
+    padding: 10px 12px;
+    text-align: left;
+}
+.comparison-table th {
+    background-color: var(--bg);
+    font-weight: 600;
+}
+.comparison-table td {
+    font-size: 0.95rem;
+}
+.comparison-table tr:nth-child(even) td {
+    background-color: #fcfcfd; /* Slightly different from --bg for striping */
+}
+
 footer {
     text-align: center;
     color: var(--secondary);
@@ -153,6 +199,22 @@ footer {
     margin-top: 32px;
 }
 
+/* Responsive Enhancements */
+@media (max-width: 768px) { /* Tablet breakpoint */
+    /* .filters already flex-column in 600px, this could be for wider small screens */
+    /* The prompt mentions .filters is already flex-column at 600px,
+       so specific styling for .filters at 768px might be redundant
+       if 600px styles cover it. However, the input styling is new. */
+
+    #search-section input[type="text"],
+    #search-section input[type="number"],
+    #search-section select,
+    #search-section button { /* Applied to #search-section generic inputs/button */
+        width: calc(100% - 28px); /* Account for padding in input/select/button */
+        margin-right: 0;
+    }
+}
+
 @media (max-width: 600px) {
     main {
         padding: 0 4px 32px 4px;
@@ -160,14 +222,39 @@ footer {
     section {
         padding: 18px 6px;
     }
-    nav {
+    nav { /* This was existing, but added nav-links changes below */
         flex-direction: column;
         height: auto;
         gap: 8px;
     }
-    .filters {
+    .filters { /* This was existing */
         flex-direction: column;
         gap: 8px;
+    }
+
+    /* Ensure inputs and buttons are full width */
+    .filters input, .filters select, .filters button,
+    #search-section input[type="text"], /* from existing search in original HTML context */
+    #search-section button#search-button { /* from existing search in original HTML context */
+         width: calc(100% - 28px); /* Full width considering padding */
+         margin-right: 0;
+    }
+    .nav-links { /* Stack nav links cleanly */
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    .nav-links li {
+        width: 100%;
+        text-align: center;
+        padding: 8px 0;
+        border-bottom: 1px solid var(--border);
+    }
+    .nav-links li:last-child {
+        border-bottom: none;
+    }
+    .user-account {
+        margin-top: 12px; /* Added to ensure spacing when nav stacks */
     }
 }
 /* Modal styles */
