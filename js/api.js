@@ -1,6 +1,13 @@
 // js/api.js
 // Handles data fetching, user authentication, and other backend interactions.
 
+// Base URL for all API calls.
+// Change this to your actual backend API URL when deploying.
+// For example: 'https://your-api.example.com/v1'
+// Using a relative path like '/api' assumes the frontend is served from the same domain as the backend,
+// or a proxy is set up to route /api requests to the backend.
+const BASE_API_URL = '/api';
+
 /**
  * @namespace ApiClient
  * @description Manages all API interactions for the application.
@@ -45,18 +52,58 @@ const ApiClient = {
             params.append('brand', filters.brand);
         }
 
-        try {
-            const response = await fetch(`/api/products?${params.toString()}`);
-            if (!response.ok) {
-                const errorText = await response.text();
-                console.error('API Error in fetchProductPrices:', response.status, errorText);
-                return { error: true, status: response.status, message: `API Error: ${response.status} ${errorText}`, data: [] };
-            }
-            return await response.json();
-        } catch (error) {
-            console.error('Fetch failed in fetchProductPrices:', error);
-            return { error: true, message: error.message, data: [] };
+        // --- TEMPORARY MOCK DATA IMPLEMENTATION ---
+        console.log(`Mock Fetch Product Prices - Query: ${query}, Filters:`, filters);
+        // const params = new URLSearchParams(); // Original params logic commented for mock
+        // if (query) params.append('q', query);
+        // if (filters) {
+        //     if (filters.category) params.append('category', filters.category);
+        //     if (filters.brand) params.append('brand', filters.brand);
+        //     if (filters.minPrice) params.append('min_price', filters.minPrice);
+        //     if (filters.maxPrice) params.append('max_price', filters.maxPrice);
+        // }
+
+        // try {
+            // REAL API CALL (commented out for mock data)
+            // const response = await fetch(`${BASE_API_URL}/products?${params.toString()}`);
+            // if (!response.ok) {
+            //     const errorText = await response.text();
+            //     console.error('API Error:', response.status, errorText);
+            //     return { error: true, status: response.status, message: `API Error: ${response.status} ${errorText}`, data: [] };
+            // }
+            // return await response.json();
+
+        // --- New mock implementation for simplicity ---
+        await new Promise(resolve => setTimeout(resolve, 200)); // Simulate delay
+        let responseData = { productId: query, productName: query, data: [] };
+        if (query && query.toLowerCase().includes('молоко')) {
+            responseData = {
+                productId: 'milk123',
+                productName: 'Молоко "Фермерское" 3.2%',
+                data: [
+                    { service: 'Самокат', price: 199, url: '#' },
+                    { service: 'Яндекс Лавка', price: 205, url: '#' },
+                    { service: 'Kuper', price: 210, url: '#' }
+                ]
+            };
+        } else if (query && query.toLowerCase().includes('хлеб')) {
+            responseData = {
+                productId: 'bread456',
+                productName: 'Хлеб "Бородинский"',
+                data: [
+                    { service: 'Самокат', price: 80, url: '#' },
+                    { service: 'Яндекс Лавка', price: 85, url: '#' }
+                ]
+            };
+        } else if (query) {
+             responseData = { productId: query + '001', productName: `Продукт "${query}"`, data: [{service: 'Местный магазин', price: 150, url: '#'}] };
         }
+        console.log("Returning mock product data:", responseData);
+        return responseData; // This structure matches what renderSearchResults expects
+        // } catch (error) { // Catch for original fetch
+        //     console.error('Fetch failed (or mock generation failed):', error);
+        //     return { error: true, message: error.message, data: [] };
+        // }
     },
 
     /**
@@ -66,18 +113,25 @@ const ApiClient = {
      *                           Returns { error: true, message: string, data: [] } on failure.
      */
     fetchCategories: async function() {
-        try {
-            const response = await fetch('/api/categories');
-            if (!response.ok) {
-                const errorText = await response.text();
-                console.error('API Error in fetchCategories:', response.status, errorText);
-                return { error: true, status: response.status, message: `API Error: ${response.status} ${errorText}`, data: [] };
-            }
-            return await response.json();
-        } catch (error) {
-            console.error('Fetch failed in fetchCategories:', error);
-            return { error: true, message: error.message, data: [] };
-        }
+        // --- TEMPORARY MOCK DATA IMPLEMENTATION ---
+        console.log("Mock Fetch Categories");
+        // try {
+            // REAL API CALL (commented out for mock data)
+            // const response = await fetch(`${BASE_API_URL}/categories`);
+            // if (!response.ok) { /* ... error handling ... */ }
+            // return await response.json();
+        // } catch (error) { /* ... error handling ... */ }
+
+        await new Promise(resolve => setTimeout(resolve, 100));
+        return {
+            data: [ // Ensure it returns an object with a 'data' property
+                { id: 'dairy', name: 'Молочные продукты' },
+                { id: 'bakery', name: 'Хлебобулочные изделия' },
+                { id: 'drinks', name: 'Напитки' },
+                { id: 'fruits', name: 'Фрукты' },
+                { id: 'vegetables', name: 'Овощи' }
+            ]
+        };
     },
 
     /**
@@ -87,18 +141,18 @@ const ApiClient = {
      *                           Returns { error: true, message: string, data: [] } on failure.
      */
     fetchBrands: async function() {
-        try {
-            const response = await fetch('/api/brands');
-            if (!response.ok) {
-                const errorText = await response.text();
-                console.error('API Error in fetchBrands:', response.status, errorText);
-                return { error: true, status: response.status, message: `API Error: ${response.status} ${errorText}`, data: [] };
-            }
-            return await response.json();
-        } catch (error) {
-            console.error('Fetch failed in fetchBrands:', error);
-            return { error: true, message: error.message, data: [] };
-        }
+        // --- TEMPORARY MOCK DATA IMPLEMENTATION ---
+        console.log("Mock Fetch Brands");
+        // try { /* ... REAL API CALL commented out ... */ } catch (error) { /* ... */ }
+
+        await new Promise(resolve => setTimeout(resolve, 100));
+        return {
+            data: [ // Ensure it returns an object with a 'data' property
+                { id: 'brandA', name: 'Веселый Молочник' },
+                { id: 'brandB', name: 'Хлебный Дом' },
+                { id: 'brandC', name: 'Фруктовый Сад' }
+            ]
+        };
     },
 
     /**
@@ -109,22 +163,34 @@ const ApiClient = {
      *                           Returns { error: true, message: string, data: [] } on failure or if productId is missing.
      */
     fetchPriceHistory: async function(productId) {
-        if (!productId) {
-            console.error('fetchPriceHistory: productId is required');
-            return { error: true, message: 'Product ID is required', data: [] };
+        // --- TEMPORARY MOCK DATA IMPLEMENTATION ---
+        console.log(`Mock Fetch Price History for productId: ${productId}`);
+        // if (!productId) { // Original check still relevant if we were to mix
+        //     console.error('fetchPriceHistory: productId is required');
+        //     return { error: true, message: 'Product ID is required', data: [] };
+        // }
+        // try { /* ... REAL API CALL commented out ... */ } catch (error) { /* ... */ }
+
+        await new Promise(resolve => setTimeout(resolve, 150));
+        let history = [];
+        if (productId === 'milk123') {
+            history = [
+              {"date": "2024-05-01T00:00:00Z", "price": 210},
+              {"date": "2024-05-02T00:00:00Z", "price": 205},
+              {"date": "2024-05-03T00:00:00Z", "price": 205},
+              {"date": "2024-05-04T00:00:00Z", "price": 200},
+              {"date": "2024-05-05T00:00:00Z", "price": 199},
+              {"date": "2024-05-06T00:00:00Z", "price": 199},
+              {"date": "2024-05-07T00:00:00Z", "price": 198}
+            ];
+        } else if (productId === 'bread456') {
+             history = [
+              {"date": "2024-05-01T00:00:00Z", "price": 85},
+              {"date": "2024-05-02T00:00:00Z", "price": 82},
+              {"date": "2024-05-07T00:00:00Z", "price": 80}
+            ];
         }
-        try {
-            const response = await fetch(`/api/products/${productId}/history`);
-            if (!response.ok) {
-                const errorText = await response.text();
-                console.error('API Error in fetchPriceHistory:', response.status, errorText);
-                return { error: true, status: response.status, message: `API Error: ${response.status} ${errorText}`, data: [] };
-            }
-            return await response.json();
-        } catch (error) {
-            console.error('Fetch failed in fetchPriceHistory:', error);
-            return { error: true, message: error.message, data: [] };
-        }
+        return { data: history }; // Ensure it returns an object with a 'data' property
     },
 
     /**
